@@ -4,11 +4,7 @@ require 'pry'
 class Cleaner
   
   attr_reader :loader, :contents, :first_name, :last_name, :zipcode, :cleaned_number, :cleaned_first_name, :cleaned_last_name
-  
-  def initialize(filename="event_attendees.csv")
-    @loader = Loader.new
-    @contents = loader.open_file(filename)
-  end
+
   
   def clean_first_name(first_name)
     first_name = first_name.strip
@@ -24,7 +20,7 @@ class Cleaner
     zipcode.to_s.rjust(5, "0")[0..4]
   end
 
-  def clean_number(number)
+  def clean_phone_number(number)
     cleaned_number = number.gsub(/[^0-9A-Za-z]/, '').to_s
     if cleaned_number.length > 11
       return "Bad number entry."
