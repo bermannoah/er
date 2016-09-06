@@ -1,12 +1,29 @@
+require './lib/cleaner'
+require 'rubygems'
 require 'csv'
+require 'geocoder'
+require 'congress'
 require 'pry'
 
 class Loader
 
+  attr_reader :api_key, :client
   attr_accessor :contents
+  
+  def initialize
+    @api_key = File.read "./config/api_key.txt"
+    @client = Congress::Client.new(@api_key)
+    @data = {}
+  end
 
   def open_file(filename="./event_attendees.csv")
     @contents = CSV.open filename, headers: true, header_converters: :symbol
   end
+  
+  
+  
+  
+  
+  
 
 end
