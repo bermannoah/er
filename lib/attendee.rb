@@ -2,11 +2,14 @@ require './lib/cleaner'
 
 class Attendee < Cleaner
   
-  def initialize(row)
-    @first_name = clean_first_name(row[:first_name])
-    @last_name = clean_last_name(row[:last_name])
+  attr_reader :first_name, :last_name, :email, :street_address, :city, :state, :zipcode, :phone_number
+  
+  def initialize(row=nil)
+    cleaner = Cleaner.new
+    @first_name = cleaner.clean_first_name(row[:first_name])
+    @last_name = cleaner.clean_last_name(row[:last_name])
     @email = row[:email_address]
-    @street_address = row[:street_address]
+    @street_address = row[:street]
     @city = row[:city]
     @state = row[:state]
     @zipcode = cleaner.clean_zipcode(row[:zipcode])

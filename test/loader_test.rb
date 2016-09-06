@@ -31,7 +31,8 @@ class LoaderTest < Minitest::Test
   
   def test_loader_can_find_last_names
     l = Loader.new
-    l.open_file.collector
+    l.open_file
+    l.collector
     refute_equal nil, l.data
   end
   

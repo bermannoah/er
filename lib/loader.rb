@@ -7,7 +7,7 @@ require 'pry'
 
 class Loader
 
-  attr_reader :api_key, :client
+  attr_reader :api_key, :client, :collector
   attr_accessor :contents, :data
   
   def initialize
