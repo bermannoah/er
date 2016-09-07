@@ -23,7 +23,25 @@ class QueueHolderTest < Minitest::Test
     q.find("zipcode", "98122")
     assert_equal 2, q.queue_results[0].count
   end
+  
+  def test_queue_can_clear_itself
+    q = QueueHolder.new
+    q.open_file
+    q.attendee_collector
+    q.find("zipcode", "20010")
+    assert_equal 1, q.queue_results[0].count
+    q.clear
+    assert_equal 0, q.queue_results[0].count
+  end
 
-
-
+  def test_if_less_than_ten_entries_queue_looks_for_district
+    q = QueueHolder.new
+    q.open_file
+    q.attendee_collector
+    q.find("zipcode", "20010")
+    assert_equal 1, q.queue_results[0].count
+    q.district
+    binding.pry
+    assert_equal 0, q.queue_results.district
+  end
 end

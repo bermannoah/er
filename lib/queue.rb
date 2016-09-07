@@ -20,8 +20,24 @@ class QueueHolder < Loader
   end
   
   def count
-      count = @queue_results.count
+      count = @queue_results.count 
   end
+  
+  # what do I do if I don't want to run a search first? can I start over from prev queue?
+  
+  def clear
+    @queue_results = [[]]
+  end
+  
+  def district
+    if @queue_results[0].count < 10
+      found_district = @client.districts_locate(queue_results[0][0].zipcode)
+      @queue_results[0] << found_district
+    else
+      "Sorry, too many entries."
+    end
+  end
+  
   
   
 
