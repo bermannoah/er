@@ -9,11 +9,6 @@ require 'pry'
 
 class CleanerTest < Minitest::Test
   
-  def test_cleaner_can_open_file
-    c = Cleaner.new
-    refute_equal nil, c.contents
-  end
-  
   def test_cleaner_can_clean_a_first_name
     c = Cleaner.new
     assert_equal "Bob", c.clean_first_name("          Bob")

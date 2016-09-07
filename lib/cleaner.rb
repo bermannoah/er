@@ -22,18 +22,14 @@ class Cleaner
 
   def clean_phone_number(number)
     cleaned_number = number.gsub(/[^0-9A-Za-z]/, '').to_s
-    if cleaned_number.length > 11
+    if cleaned_number.length > 11 || cleaned_number.length < 10 || cleaned_number[0] != "1" && cleaned_number.length == 11
       return "Bad number entry."
     elsif cleaned_number[0] == "1" && cleaned_number.length == 11
       cleaned_number = cleaned_number[1..-1].to_i
-    elsif cleaned_number[0] != "1" && cleaned_number.length == 11
-      return "Bad number entry."
-    elsif cleaned_number.length < 10
-      return "Bad number entry."
-    else
+    else 
       cleaned_number.to_i
     end
     cleaned_number.to_i
   end
-  
+
 end

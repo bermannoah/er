@@ -4,6 +4,7 @@ puts "Hello and welcome to Event Reporter, for all your event reporting needs."
 puts "If you're not sure what to do, enter 'help'."
 
 user_selection = ""
+repl = Repl.new
 loop do 
   print "Enter command > "
   user_selection = gets.chomp

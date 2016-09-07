@@ -14,7 +14,6 @@ class Loader
     @api_key = File.read "./config/api_key.txt"
     @client = Congress::Client.new(@api_key)
     @data = []
-    @cleaner = Cleaner.new
   end
 
   def open_file(filename="./event_attendees.csv")
@@ -28,8 +27,4 @@ class Loader
     @data
   end
   
-  
-  
-  
-
 end

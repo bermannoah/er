@@ -1,6 +1,6 @@
 require './lib/cleaner'
 
-class Attendee < Cleaner
+class Attendee
   
   attr_reader :first_name, :last_name, :email, :street_address, :city, :state, :zipcode, :phone_number
   
