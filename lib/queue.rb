@@ -7,7 +7,7 @@ require 'pry'
 
 class QueueHolder < Loader
   
-  attr_accessor :queue, :api_key, :client
+  attr_accessor :queue, :api_key, :client, :found_district
   
   HEADER_ROW = ["LAST NAME", "FIRST NAME", "EMAIL", "ZIPCODE", "CITY", "STATE", "ADDRESS", "PHONE", "DISTRICT" ]
   
@@ -31,8 +31,9 @@ class QueueHolder < Loader
   
   def district
     if @queue_results[0].count < 10
-      found_district = @client.districts_locate(queue_results[0][0].zipcode)
-      @queue_results[0] << found_district
+      found_district = @client.districts_locate(queue_results[0][0].zipcode)[:results][0][:district].to_s
+      found_district
+      return "District is #{found_district}"
     else
       "Sorry, too many entries."
     end

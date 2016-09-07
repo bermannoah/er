@@ -41,7 +41,19 @@ class QueueHolderTest < Minitest::Test
     q.find("zipcode", "20010")
     assert_equal 1, q.queue_results[0].count
     q.district
-    binding.pry
-    assert_equal 0, q.queue_results.district
+    assert_equal "District is 0", q.district
   end
+  
+  def test_if_less_than_ten_entries_queue_looks_for_district_and_doesnt_just_return_default
+    q = QueueHolder.new
+    q.open_file
+    q.attendee_collector
+    q.find("zipcode", "94611")
+    assert_equal 1, q.queue_results[0].count
+    q.district
+    assert_equal "District is 13", q.district
+  end
+  
+  
+  
 end
