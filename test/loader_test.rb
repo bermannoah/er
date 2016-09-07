@@ -68,7 +68,7 @@ class LoaderTest < Minitest::Test
   def test_loader_can_find_by_phone_number
     l = Loader.new
     l.open_file
-    l.attendee_collector 
+    l.attendee_collector
     l.find("phone_number", 6154385000)
     assert_equal 6154385000, l.queue_results[0][0].phone_number
   end

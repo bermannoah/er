@@ -20,8 +20,10 @@ class QueueHolderTest < Minitest::Test
     q = QueueHolder.new
     q.open_file
     q.attendee_collector
-    q.find("zipcode", "20010")
-    assert_equal 1, q.queue_results.count
+    q.find("zipcode", "98122")
+    assert_equal 2, q.queue_results[0].count
   end
+
+
 
 end

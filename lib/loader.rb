@@ -29,6 +29,7 @@ class Loader
   
   def find(attribute, criteria)
     @queue_results << @data.find_all { |attendee| attendee.send(attribute) == criteria } 
+    # need something here in case it doesn't find a thing
   end
 end
     
