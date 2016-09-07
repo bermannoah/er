@@ -2,7 +2,7 @@ require './lib/cleaner'
 
 class Attendee
   
-  attr_reader :first_name, :last_name, :email, :street_address, :city, :state, :zipcode, :phone_number
+  attr_accessor :first_name, :last_name, :email, :street_address, :city, :state, :zipcode, :phone_number
   
   def initialize(row=nil)
     cleaner = Cleaner.new

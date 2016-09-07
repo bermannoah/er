@@ -8,18 +8,18 @@ require 'pry'
 class QueueHolder
   
   attr_accessor :queue
-  HEADER_ROW = ["LAST NAME", "FIRST NAME", "EMAIL", ]
+  HEADER_ROW = ["LAST NAME", "FIRST NAME", "EMAIL", "ZIPCODE", "CITY", "STATE", "ADDRESS", "PHONE", "DISTRICT" ]
   
   def initialize
     @contents = []
   end
   
-  def instructions(command)
-    return puts
-  
-  # starts as empty array
-  
-  # load 
-  
+  # def instructions(command)
+  #   return puts
+  # 
+  # # starts as empty array
+  # 
+  # # load 
+  # 
   
 end

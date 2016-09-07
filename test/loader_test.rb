@@ -22,11 +22,9 @@ class LoaderTest < Minitest::Test
     assert_equal true, name.include?("Ann")
   end
   
-  def test_loader_can_find_last_names
+  def test_loader_can_find_by_first_name
     l = Loader.new
-    l.open_file
-    l.collector
-    refute_equal nil, l.data
   end
+  
   
 end

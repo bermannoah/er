@@ -1,7 +1,7 @@
 require './test/test_helper'
 require './lib/queue'
 
-class QueueTest < Minitest::Test
+class QueueHolderTest < Minitest::Test
   
 
 end
