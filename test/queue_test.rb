@@ -21,7 +21,7 @@ class QueueHolderTest < Minitest::Test
     q.open_file
     q.attendee_collector
     q.find("zipcode", "98122")
-    assert_equal 2, q.queue_results[0].count
+    assert_equal 2, q.queue_results.count
   end
   
   def test_queue_can_clear_itself
@@ -29,9 +29,9 @@ class QueueHolderTest < Minitest::Test
     q.open_file
     q.attendee_collector
     q.find("zipcode", "20010")
-    assert_equal 1, q.queue_results[0].count
+    assert_equal 1, q.queue_results.count
     q.clear
-    assert_equal 0, q.queue_results[0].count
+    assert_equal 0, q.queue_results.count
   end
 
   def test_if_less_than_ten_entries_queue_looks_for_district
@@ -39,7 +39,7 @@ class QueueHolderTest < Minitest::Test
     q.open_file
     q.attendee_collector
     q.find("zipcode", "20010")
-    assert_equal 1, q.queue_results[0].count
+    assert_equal 1, q.queue_results.count
     q.district
     assert_equal "District is 0", q.district
   end
@@ -49,11 +49,18 @@ class QueueHolderTest < Minitest::Test
     q.open_file
     q.attendee_collector
     q.find("zipcode", "94611")
-    assert_equal 1, q.queue_results[0].count
+    assert_equal 1, q.queue_results.count
     q.district
     assert_equal "District is 13", q.district
   end
   
-  
+  def test_if_more_than_ten_entries_queue_will_not_look_for_districts
+    q = QueueHolder.new
+    q.all_entries
+    assert_equal 19, q.count
+    q.district
+    assert_equal "Sorry, too many entries.", q.district
+  end
+
   
 end

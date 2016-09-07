@@ -7,7 +7,7 @@ require 'pry'
 
 class Loader
 
-  attr_reader :api_key, :client, :collector
+  attr_reader :api_key, :client, :attendee_collector
   attr_accessor :contents, :data, :attribute, :criteria, :queue_results
   
   def initialize(filename="./event_attendees.csv")
@@ -28,7 +28,7 @@ class Loader
   end
   
   def find(attribute, criteria)
-    @queue_results << @data.find_all { |attendee| attendee.send(attribute) == criteria } 
+    (@queue_results << @data.find_all { |attendee| attendee.send(attribute) == criteria }).flatten! 
     # need something here in case it doesn't find a thing
   end
 end

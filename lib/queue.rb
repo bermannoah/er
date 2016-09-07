@@ -19,6 +19,12 @@ class QueueHolder < Loader
     @queue_results = []
   end
   
+  def all_entries(filename="./event_attendees.csv")
+    l = Loader.new
+    l.open_file
+    @queue_results = l.attendee_collector
+  end
+  
   def count
       count = @queue_results.count 
   end
@@ -26,18 +32,21 @@ class QueueHolder < Loader
   # what do I do if I don't want to run a search first? can I start over from prev queue?
   
   def clear
-    @queue_results = [[]]
+    @queue_results = []
   end
   
   def district
-    if @queue_results[0].count < 10
-      found_district = @client.districts_locate(queue_results[0][0].zipcode)[:results][0][:district].to_s
+    if @queue_results.count < 10
+      found_district = @client.districts_locate(queue_results[0].zipcode)[:results][0][:district].to_s
       found_district
       return "District is #{found_district}"
     else
       "Sorry, too many entries."
     end
   end
+  
+  
+  
   
   
   
