@@ -1,2 +1,2 @@
-# er
-take 2
+# event-reporter
+a turing code school mod1 project
