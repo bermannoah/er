@@ -21,11 +21,17 @@ class Loader
     @contents = CSV.open filename, headers: true, header_converters: :symbol
   end
   
-  def collector
+  def attendee_collector
     @data = @contents.map do |row|
       Attendee.new(row)
     end
     @data
+  end
+  
+  def find
+    
+    
+    
   end
   
 end
