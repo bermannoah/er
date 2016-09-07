@@ -1,5 +1,4 @@
 require './lib/attendee'
-
 require 'rubygems'
 require 'csv'
 require 'geocoder'
@@ -9,11 +8,9 @@ require 'pry'
 class Loader
 
   attr_reader :api_key, :client, :collector
-  attr_accessor :contents, :data, :attribute, :criteria
+  attr_accessor :contents, :data, :attribute, :criteria, :queue_results
   
   def initialize(filename="./event_attendees.csv")
-    @api_key = File.read "./config/api_key.txt"
-    @client = Congress::Client.new(@api_key)
     @data = []
     @contents = nil
     @queue_results = []
