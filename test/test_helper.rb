@@ -1,9 +1,10 @@
 require 'simplecov'
 SimpleCov.start
+gem 'minitest', '~> 5.2'
+require 'minitest/autorun'
+require 'minitest/pride'
+require 'congress'
+require 'csv'
+require 'pry'
 
-ruby test/cleaner_test.rb
-ruby test/loader_test.rb
-ruby test/print_test.rb
-ruby test/queue_test.rb
-ruby test/repl_test.rb
-ruby test/help_test.rb
+

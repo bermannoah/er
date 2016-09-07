@@ -5,7 +5,9 @@ require 'geocoder'
 require 'congress'
 require 'pry'
 
-class Queue(filename="./event_attendees.csv")
+class Queue
+  
+  attr_reader :contents
 
   def initialize(filename="./event_attendees.csv")
     @contents = Loader.new(filename).contents

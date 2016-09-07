@@ -1,27 +1,28 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
-require 'simplecov'
-SimpleCov.start
+require './test/test_helper'
 require './lib/attendee'
 require './lib/loader'
-require 'csv'
-require 'pry'
 
 class AttendeeTest < Minitest::Test
   
+  
+  
   def test_attendee_has_a_first_name
-    l = Loader.new
-    l.open_file
-    l.collector
-    assert_equal "Allison", l.data[0].first_name
+    a = Attendee.new( { :first_name => "Allison",
+                        :last_name => "Nguyen",
+                        :zipcode => 12345,
+                        :homephone => "6154385000"
+                                                } )
+    assert_equal "Allison", a.first_name
+    assert true
   end
   
   def test_attendee_has_a_last_name
-    l = Loader.new
-    l.open_file
-    l.collector
-    assert_equal "Nguyen", l.data[0].last_name
+    a = Attendee.new( { :first_name => "Allison",
+                        :last_name => "Nguyen",
+                        :zipcode => 12345,
+                        :homephone => "6154385000"
+                                                } )
+    assert_equal "Nguyen", a.last_name
   end
   
   def test_attendee_has_an_email_address

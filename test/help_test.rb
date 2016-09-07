@@ -1,8 +1,7 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
-require 'simplecov'
-SimpleCov.start
+require './test/test_helper'
 require './lib/help'
-require 'csv'
-require 'pry'
+
+class HelpTest 
+  
+  
+end

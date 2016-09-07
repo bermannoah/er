@@ -1,12 +1,5 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
-require 'simplecov'
-SimpleCov.start
+require './test/test_helper'
 require './lib/loader'
-require 'csv'
-require 'congress'
-require 'pry'
 
 class LoaderTest < Minitest::Test
   

@@ -1,4 +1,3 @@
-require './lib/loader'
 require 'pry'
 
 class Cleaner
