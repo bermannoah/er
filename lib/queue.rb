@@ -2,15 +2,16 @@ require './lib/loader'
 require 'rubygems'
 require 'terminal-table'
 require 'csv'
+require 'date'
 require 'geocoder'
 require 'congress'
 require 'pry'
 
 class QueueHolder < Loader
   
-  attr_accessor :queue, :api_key, :client, :found_district, :queue_count, :rows
+  attr_accessor :queue, :api_key, :client, :found_district, :queue_count, :queue_results, :rows
   
-  HEADER_ROW = ["LAST NAME", "FIRST NAME", "EMAIL", "ZIPCODE", "CITY", "STATE", "ADDRESS", "PHONE", "DISTRICT" ]
+  HEADER_ROW = ["LAST NAME", "FIRST NAME", "EMAIL", "ZIPCODE", "CITY", "STATE", "ADDRESS", "PHONE"]
   
   def initialize
     @api_key = File.read "./config/api_key.txt"
@@ -46,9 +47,12 @@ class QueueHolder < Loader
   
   def queue_print
     rows = []
-    rows << @queue_results[last_name]
-    table = Terminal::Table.new :title => "Queue Printout", :headings => HEADER_ROW, :rows => rows
-      
+    rows << [@queue_results[0].last_name, @queue_results[0].first_name, @queue_results[0].email, @queue_results[0].zipcode, @queue_results[0].city, @queue_results[0].state, @queue_results[0].street_address, @queue_results[0].phone_number]
+    table = Terminal::Table.new
+    table.align_column(0..7, :left)
+    table.title = "Queue Printout on #{Time.now.strftime("%d/%m/%Y at %H:%M")}"
+    table.headings = [HEADER_ROW]
+    table.rows = rows
     puts table
     
   end
