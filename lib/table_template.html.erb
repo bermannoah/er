@@ -2,10 +2,10 @@
 <head>
   <meta charset='utf-8'>
   <title><%= filename %></title>
-  <link href="./stylesheet.css" rel="stylesheet" type="text/css">
+  <link href="stylesheet.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <div class="header">Queue Output printed on <%= current_date %>.</div>
+  <div class="header">Queue Output printed on <%= Time.now.strftime("%d/%m/%Y at %H:%M") %>.</div>
 
   <table>
     <tr> <th class="table">Last Name</th> <th class="table">First Name</th>
