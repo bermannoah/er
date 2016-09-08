@@ -9,13 +9,9 @@ class Repl
   def initialize
     @loader = Loader.new(filename="event_attendees.csv")
     @queue = QueueHolder.new
-    # @help = Help.new
     @user_selection = "here is a string"
   end
-  
-  
 
-  
   def run
 
     puts "Hello and welcome to Event Reporter, for all your event reporting needs."
@@ -31,49 +27,14 @@ class Repl
       when "queue"
         queue_commands(selection, attribute)
       when "load"
-        load_command(selection)
+        load_commands(selection)
+      when "find"
+        find_commands(selection, attribute)
+      when "help"
+        help_commands(selection)
       end
-      
-      # if command == "queue"
-      #   
-      #   if selection == "count"
-      #     puts @queue.queue_count
-      #   elsif selection == "clear"
-      #     @queue.queue_clear
-      #   elsif selection == "district"
-      #     @queue.queue_district
-      #   elsif selection == "print" && attribute.nil?
-      #     @queue.queue_print
-      #   elsif selection == "print" && attribute.nil? == false
-      #     @queue.queue_print_by(attribute)
-      #   elsif selection == "save" && attribute == "*.csv"
-      #     @queue.queue_save_to(filename=attribute)
-      #   elsif selection == "export" && attribute == "*.html"
-      #     @queue.queue_export_html(filename=attribute)
-      #   else
-      #     puts "I'm afraid I can't do that."
-      # end
-      # 
-      # if command == "load"
-      #   filename = usable[1]
-      #   @loader.open_file
-      #   @loader.attendee_collector
-      # end
-      # 
-      # if command == "find"
-      #   attribute = usable[1].to_s
-      #   criteria = usable[2].to_s
-      #   @loader.find(attribute, criteria)
-      # end
-      # 
-      # if command == "help"
-      #   @help
-      # end
-
-      
     end
-
-
+    
   end
   
   def queue_commands(selection, attribute)
@@ -82,49 +43,38 @@ class Repl
       puts @queue.queue_count
     when "clear"
       puts @queue.queue_clear 
+    when "district"
+      puts @queue.queue_district
+    when "print"
+      puts @queue.queue_print
+    when "print by"
+      puts @queue.queue_print_by(attribute)
+    when "save to"
+      puts @queue.queue_save_to(attribute)
+    when "export html"
+      puts @queue.queue_export_html(attribute)
+    else
+      puts "Incorrect input."
     end
     
   end
   
-  
-  
-  def load_command(filename)
+  def load_commands(filename)
     filename = filename || "./event_attendees.csv"
-    @loader.open_file(filename)
-    @loader.attendee_collector
+    @queue.open_file(filename)
+    @queue.attendee_collector
+    puts "Loaded #{filename}."
   end
   
-  def find(attribute, criteria)
-    @loader.find(attribute, criteria)
+  def find_commands(attribute, criteria)
+    @queue.find(attribute, criteria)
+    puts "Found #{queue.queue_results.count} records."
   end
   
-  def queue_count
-    puts @queue.queue_count
+  def help_commands(attribute)
+    Help.new
   end
   
-  def queue_clear
-    @queue.queue_clear
-  end
-  
-  def queue_district
-    @queue.queue_district
-  end
-  
-  def queue_print
-    @queue.queue_print
-  end
-  
-  def queue_print_by(attribute)
-    @queue.queue_print_by(attribute)
-  end
-  
-  def queue_save_to(filename)
-    @queue.queue_save_to(filename)
-  end
-  
-  def queue_export_html(filename)
-    @queue.queue_export_html(filename)
-  end
   
 end
 
