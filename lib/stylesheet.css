@@ -28,28 +28,17 @@
   line-height: 40px;
 }
 
-/* Text Styles */
+/* Table Styles */
 
 .table {
-  font-family: helvetica, sans-serif;
-  font-size: 2em;
-  font-weight: bolder;
-  color: #000;
-  position: relative;
-  float: left;
-  clear: both;
-  margin: 23px;
-  line-height: 40px;
+  text-align: left;
+  border: 1px solid black;
 }
 
-.legislator {
+.table_head {
+  text-align: left;
+  border: 1px solid black;
   font-family: helvetica, sans-serif;
   font-size: 1em;
   font-weight: bolder;
-  color: #000;
-  position: relative;
-  float: left;
-  clear: both;
-  margin: 23px;
-  line-height: 40px;
 }

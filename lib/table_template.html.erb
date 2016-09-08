@@ -7,16 +7,25 @@
 <body>
   <div class="header">Queue Output printed on <%= Time.now.strftime("%d/%m/%Y at %H:%M") %>.</div>
 
-  <table>
-    <tr> <th class="table">Last Name</th> <th class="table">First Name</th>
-        <th class="table">Email</th> <th class="table">Zipcode</th>
-        <th class="table">City</th> <th class="table">State</th>
-        <th class="table">Address</th> <th class="table">Phone</th>
+  <table class="table">
+    <tr class="table_head"> 
+      <th class="table_head">Last Name</th> <th class="table_head">First Name</th>
+      <th class="table_head">Email</th> <th class="table_head">Zipcode</th>
+      <th class="table_head">City</th> <th class="table_head">State</th>
+      <th class="table_head">Address</th> <th class="table_head">Phone</th>
     </tr>
     
+  
     <% @queue_results.each do |attendee| %>
-      <tr class="legislator">
-        <td><%= "#{attendee.last_name} #{attendee.first_name} #{attendee.email} #{attendee.zipcode} #{attendee.city} #{attendee.state} #{attendee.street_address} #{attendee.phone_number}" %></td>
+      <tr class="table">
+        <td class="table"><%= "#{attendee.last_name}" %></td> 
+        <td class="table"><%= "#{attendee.first_name}" %></td> 
+        <td class="table"><%= "#{attendee.email}" %></td> 
+        <td class="table"><%= "#{attendee.zipcode}" %></td> 
+        <td class="table"><%= "#{attendee.city}" %></td> 
+        <td class="table"><%= "#{attendee.state}" %></td> 
+        <td class="table"><%= "#{attendee.street_address}" %></td>
+        <td class="table"><%= "#{attendee.phone_number}" %></td>
       </tr>
     <% end %>
 

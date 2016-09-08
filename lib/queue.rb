@@ -32,6 +32,7 @@ class QueueHolder < Loader
     @queue_results.count 
   end
     
+    
   def queue_clear
     @queue_results = []
   end
