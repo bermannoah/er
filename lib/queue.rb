@@ -30,11 +30,13 @@ class QueueHolder < Loader
   
   def queue_count
     @queue_results.count 
+    puts "The queue count is #{@queue_results.count}."
   end
     
     
   def queue_clear
     @queue_results = []
+    puts "The queue has been cleared."
   end
   
   def queue_district(zipcode=queue_results[0].zipcode)
@@ -102,35 +104,6 @@ class QueueHolder < Loader
       file.puts css_file
     end
   end
-  
-  
-  
-  
-  # def html_directory_generator(filename)
-  #     Dir.mkdir("output") && (File.rename "./lib/stylesheet.css", "./output/stylesheet.css") unless Dir.exists? "output"
-  #     output_dir = Dir["./output"]    
-  #     File.open("#{filename}.html", 'w') do |file|
-  #       file.puts html_output
-  #     end
-  #   
-  # end
-  # 
-  
-  # 
-  # def queue_export_html(filename="output/QueueOutput")
-  #   @queue_results.each do |row|
-  #     erb_template = ERB.new @html_template
-  #     html_output = erb_template.result(binding)
-  #     
-  #     current_date = "#{Time.now.strftime("%d/%m/%Y at %H:%M")}"
-  #     html_directory_generator(filename)
-  #     css_file_regenerator
-  #     
-  #   end
-  #     puts "HTML file exported with the name #{filename}.html."
-  #     exit
-  # end
-  
   
 end
 
