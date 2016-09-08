@@ -21,6 +21,7 @@ class QueueHolder < Loader
     @queue_results = []
     @final_table = nil
     @district = district
+    @erb_template = ERB.new template_table
   end
   
   def all_entries(filename="./event_attendees.csv")
@@ -68,15 +69,42 @@ class QueueHolder < Loader
     end
   end
   
-  def queue_print_to_csv(filename="QueueOutput.csv")
-    CSV.open(filename, 'w') do |csv|
+  def queue_print_to_csv(filename="QueueOutput")
+    CSV.open("#{filename}.csv", 'w') do |csv|
       header_names = %w( first_name last_name email street_address city state zipcode phone_number )
       csv << header_names
       @queue_results.each do |attendee|
         csv << header_names.collect { |header| attendee.send(header) }
       end
+      puts "CSV file exported with the name #{filename}.csv."
       exit
     end
   end
+  
+  def queue_export_html(filename="QueueOutput")
+      Dir.mkdir("output") && (File.rename "./lib/stylesheet.css", "./output/stylesheet.css") unless Dir.exists? "output"
+      output_dir = Dir["./output"]
+      filename = "output/#{filename}.html"
+
+      File.open(filename, 'w') do |file|
+        file.puts html_output
+      end
+      
+      html_output = erb_template.result(binding)
+      header_names = %w( first_name last_name email street_address city state zipcode phone_number )
+      @queue_results.each do |attendee|
+        html_output << header_names.collect { |header| attendee.send(header) }
+      end
+      exit
+    end
+  end
+
+
+    end
+
+  
+  
+  
+  
 end
   
