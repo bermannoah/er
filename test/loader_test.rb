@@ -81,4 +81,35 @@ class LoaderTest < Minitest::Test
     l.find("first_name", "Allison")
     assert_equal 1, l.queue_results.count
   end
+  
+  def test_loader_does_not_do_duplicates
+    l = Loader.new
+    l.open_file
+    l.attendee_collector
+    l.find("first_name", "Allison")
+    l.find("first_name", "Allison")
+    l.find("first_name", "Allison")
+    l.find("first_name", "Allison")
+    l.find("first_name", "Allison")
+    l.find("first_name", "Allison")
+    assert_equal 1, l.queue_results.count
+  end
+  
+  def test_loader_can_pull_multiple_things_but_not_dupes
+    l = Loader.new
+    l.open_file
+    l.attendee_collector 
+    l.find("zipcode", "98122" )
+    l.find("zipcode", "98122" )
+    assert_equal 2, l.queue_results.count
+  end
+  
+  def test_loader_does_not_add_dupes_with_different_find_calls
+    l = Loader.new
+    l.open_file
+    l.attendee_collector
+    l.find("first_name", "Allison")
+    l.find("zipcode", "20010")
+    assert_equal 1, l.queue_results.count
+  end
 end
