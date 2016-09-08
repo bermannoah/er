@@ -1,0 +1,26 @@
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title><%= filename %></title>
+  <link href="./stylesheet.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="header">Queue Output printed on <%= current_date %>.</div>
+
+  <table>
+    <tr> <th class="table">Last Name</th> <th class="table">First Name</th>
+        <th class="table">Email</th> <th class="table">Zipcode</th>
+        <th class="table">City</th> <th class="table">State</th>
+        <th class="table">Address</th> <th class="table">Phone</th>
+    </tr>
+    
+    <% @queue_results.each do |attendee| %>
+      <tr class="legislator">
+        <td><%= "#{attendee.last_name} #{attendee.first_name} #{attendee.email} #{attendee.zipcode} #{attendee.city} #{attendee.state} #{attendee.street_address} #{attendee.phone_number}" %></td>
+      </tr>
+    <% end %>
+
+  </table>
+
+</body>
+</html>

@@ -4,12 +4,13 @@ require 'terminal-table'
 require 'csv'
 require 'date'
 require 'geocoder'
+require 'erb'
 require 'congress'
 require 'pry'
 
 class QueueHolder < Loader
   
-  attr_accessor :queue, :api_key, :client, :queue_district, :found_district, :district, :queue_count, :queue_results, :rows, :table, :table_printer
+  attr_accessor :queue, :api_key, :client, :queue_district, :found_district, :district, :queue_count, :queue_results, :rows, :table, :table_printer, :html_template
   
   HEADER_ROW = ["LAST NAME", "FIRST NAME", "EMAIL", "ZIPCODE", "CITY", "STATE", "ADDRESS", "PHONE", "DISTRICT"]
   
@@ -21,7 +22,7 @@ class QueueHolder < Loader
     @queue_results = []
     @final_table = nil
     @district = district
-    @erb_template = ERB.new template_table
+    @html_template = File.read "table_template.erb"
   end
   
   def all_entries(filename="./event_attendees.csv")
@@ -81,30 +82,27 @@ class QueueHolder < Loader
     end
   end
   
-  def queue_export_html(filename="QueueOutput")
+  def html_directory_generator(filename)
       Dir.mkdir("output") && (File.rename "./lib/stylesheet.css", "./output/stylesheet.css") unless Dir.exists? "output"
-      output_dir = Dir["./output"]
-      filename = "output/#{filename}.html"
-
-      File.open(filename, 'w') do |file|
-        file.puts html_output
+      output_dir = Dir["./output"]    
+      File.open("#{filename}.html", 'w') do |file|
+        file.puts @html_output
       end
-      
-      html_output = erb_template.result(binding)
-      header_names = %w( first_name last_name email street_address city state zipcode phone_number )
-      @queue_results.each do |attendee|
-        html_output << header_names.collect { |header| attendee.send(header) }
-      end
-      exit
-    end
+    
   end
-
-
-    end
-
   
-  
-  
-  
+  def queue_export_html(filename="QueueOutput")
+      erb_template = ERB.new @html_template
+      html_output = erb_template.result(binding)
+      current_date = "#{Time.now.strftime("%d/%m/%Y at %H:%M")}"
+      html_directory_generator(filename)
+      css_file = File.read "./output/stylesheet.css"
+      File.open("./lib/stylesheet.css", 'w') do |file|
+        file.puts css_file
+      end
+      puts "HTML file exported with the name #{filename}.html."
+      exit
+  end
 end
+
   

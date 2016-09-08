@@ -28,8 +28,8 @@ class Loader
   end
   
   def find(attribute, criteria)
-    (@queue_results << @data.find_all { |attendee| attendee.send(attribute) == criteria }).flatten! 
-    # need something here in case it doesn't find a thing
+    (@queue_results << @data.find_all { |attendee| attendee.send(attribute) == criteria }).flatten!
+    # need something here in case it doesn't find a thing and if it finds a dupe
   end
 end
     
