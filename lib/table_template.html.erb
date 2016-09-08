@@ -5,17 +5,19 @@
   <link href="stylesheet.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <div class="header">Queue Output printed on <%= Time.now.strftime("%d/%m/%Y at %H:%M") %>.</div>
-
+  <h1>Queue Output printed on <%= Time.now.strftime("%d/%m/%Y at %H:%M") %>.</h1>
+  
   <table class="table">
     <tr class="table_head"> 
       <th class="table_head">Last Name</th> <th class="table_head">First Name</th>
       <th class="table_head">Email</th> <th class="table_head">Zipcode</th>
       <th class="table_head">City</th> <th class="table_head">State</th>
       <th class="table_head">Address</th> <th class="table_head">Phone</th>
+      <th class="table_head">District</th>
     </tr>
     
-  
+    <% queue_district if @queue_results.length < 11 %>
+    <% no_districts_here if @queue_results.length > 10 %>
     <% @queue_results.each do |attendee| %>
       <tr class="table">
         <td class="table"><%= "#{attendee.last_name}" %></td> 
@@ -26,6 +28,7 @@
         <td class="table"><%= "#{attendee.state}" %></td> 
         <td class="table"><%= "#{attendee.street_address}" %></td>
         <td class="table"><%= "#{attendee.phone_number}" %></td>
+        <td class="table"><%= "#{attendee.district}" %></td>
       </tr>
     <% end %>
 

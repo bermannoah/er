@@ -80,8 +80,10 @@ class QueueHolder < Loader
   
   def queue_print_to_csv(filename="QueueOutput")
     CSV.open("#{filename}.csv", 'w') do |csv|
-      header_names = %w( first_name last_name email street_address city state zipcode phone_number )
+      header_names = %w( first_name last_name email street_address city state zipcode phone_number district )
       csv << HEADER_ROW
+      queue_district if @queue_results.length < 11 
+      no_districts_here if @queue_results.length > 10
       @queue_results.each do |attendee|
         csv << header_names.collect { |header| attendee.send(header) }
       end
@@ -93,7 +95,9 @@ class QueueHolder < Loader
   def queue_export_html(filename="QueueOutput")
     Dir.mkdir("output") && (File.rename "./lib/stylesheet.css", "./output/stylesheet.css") unless Dir.exists? "output"
     export_name = "./output/filename.html"
+    
     queue_output_creator
+    
     File.open(export_name, 'w') do |file|
       file.puts @queue_output
     end

@@ -51,7 +51,7 @@ class Repl
     when "print", "by"
       puts @queue.queue_print_by(attribute)
     when "save", "to"
-      puts @queue.queue_save_to(attribute)
+      puts @queue.queue_print_to_csv(attribute)
     when "export", "html"
       puts @queue.queue_export_html(attribute)
     else
