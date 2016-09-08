@@ -68,8 +68,15 @@ class QueueHolder < Loader
     end
   end
   
-  
-  
-  
-  
+  def queue_print_to_csv(filename="QueueOutput.csv")
+    CSV.open(filename, 'w') do |csv|
+      header_names = %w( first_name last_name email street_address city state zipcode phone_number )
+      csv << header_names
+      @queue_results.each do |attendee|
+        csv << header_names.collect { |header| attendee.send(header) }
+      end
+      exit
+    end
+  end
 end
+  
