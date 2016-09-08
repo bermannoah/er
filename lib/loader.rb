@@ -30,7 +30,8 @@ class Loader
   def find(attribute, criteria)
     (@queue_results << @data.find_all { |attendee| attendee.send(attribute) == criteria }).flatten!
       @queue_results.uniq!
-    if @queue_results.nil?
+      
+    if @queue_results == []
       "#{attribute}: #{criteria} not found. Sorry about that!"
     end
   end

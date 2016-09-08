@@ -14,7 +14,7 @@ class LoaderTest < Minitest::Test
     l.open_file
     l.attendee_collector
     l.find("first_name", "Allison")
-    assert_equal 1, l.queue_results.count
+    assert_equal 16, l.queue_results.count
   end
   
   def test_loader_can_find_by_last_name
@@ -22,7 +22,7 @@ class LoaderTest < Minitest::Test
     l.open_file
     l.attendee_collector
     l.find("last_name", "Nguyen")
-    assert_equal 1, l.queue_results.count
+    assert_equal 3, l.queue_results.count
   end
   
   def test_loader_can_find_by_email_address
@@ -79,7 +79,7 @@ class LoaderTest < Minitest::Test
     l.open_file
     l.attendee_collector
     l.find("first_name", "Allison")
-    assert_equal 1, l.queue_results.count
+    assert_equal 16, l.queue_results.count
   end
   
   def test_loader_does_not_do_duplicates
@@ -88,11 +88,7 @@ class LoaderTest < Minitest::Test
     l.attendee_collector
     l.find("first_name", "Allison")
     l.find("first_name", "Allison")
-    l.find("first_name", "Allison")
-    l.find("first_name", "Allison")
-    l.find("first_name", "Allison")
-    l.find("first_name", "Allison")
-    assert_equal 1, l.queue_results.count
+    assert_equal 16, l.queue_results.count
   end
   
   def test_loader_can_pull_multiple_things_but_not_dupes
@@ -101,7 +97,7 @@ class LoaderTest < Minitest::Test
     l.attendee_collector 
     l.find("zipcode", "98122" )
     l.find("zipcode", "98122" )
-    assert_equal 2, l.queue_results.count
+    assert_equal 8, l.queue_results.count
   end
   
   def test_loader_does_not_add_dupes_with_different_find_calls
@@ -110,7 +106,7 @@ class LoaderTest < Minitest::Test
     l.attendee_collector
     l.find("first_name", "Allison")
     l.find("zipcode", "20010")
-    assert_equal 1, l.queue_results.count
+    assert_equal 20, l.queue_results.count
   end
   
   def test_loader_returns_error_message_if_it_cannot_find_a_thing

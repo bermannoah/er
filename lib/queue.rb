@@ -30,13 +30,11 @@ class QueueHolder < Loader
   
   def queue_count
     @queue_results.count 
-    puts "The queue count is #{@queue_results.count}."
   end
     
     
   def queue_clear
     @queue_results = []
-    puts "The queue has been cleared."
   end
   
   def queue_district(zipcode=queue_results[0].zipcode)
