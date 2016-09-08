@@ -1,44 +1,40 @@
-/* Doc styles */
+/* Document Styles */
+
 * {
-  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  align-self: center;
 }
 
-
-/* Text styles */
+body {
+  font: 14px / 1.4 Helvetica, Sans-Serif;
+}
 
 .header {
-  font-family: helvetica, sans-serif;
-  font-size: 50px;
-  font-weight: bolder;
-  color: #000;
-  position: relative;
-  margin: 20px;
-  float: left;
+  align-self: center;
+  font-family: Helvetica, sans-serif;
+  font-size: 1em;
 }
-
-.info {
-  font-family: helvetica, sans-serif;
-  font-size: 1.5em;
-  font-weight: bolder;
-  color: #000;
-  position: relative;
-  float: left;
-  clear: both;
-  margin: 23px;
-  line-height: 40px;
-}
-
 /* Table Styles */
 
 .table {
-  text-align: left;
-  border: 1px solid black;
+  width: 100%
+  border-collapse: collapse;
 }
 
-.table_head {
+/* stripes apparently */
+tr:nth-of-type(odd) {
+  background: #eee;
+}
+
+th {
+  background: #333;
+  color: white;
+  font-weight: bold;
+}
+
+td, th {
+  padding: 6px;
+  border: 1px solid #ccc;
   text-align: left;
-  border: 1px solid black;
-  font-family: helvetica, sans-serif;
-  font-size: 1em;
-  font-weight: bolder;
 }
