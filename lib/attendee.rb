@@ -2,7 +2,7 @@ require './lib/cleaner'
 
 class Attendee
   
-  attr_accessor :first_name, :last_name, :email, :street_address, :city, :state, :zipcode, :phone_number
+  attr_accessor :first_name, :last_name, :email, :street_address, :city, :state, :zipcode, :phone_number, :district
   
   def initialize(row=nil)
     cleaner = Cleaner.new
@@ -14,6 +14,7 @@ class Attendee
     @state = row[:state]
     @zipcode = cleaner.clean_zipcode(row[:zipcode])
     @phone_number = cleaner.clean_phone_number(row[:homephone])
+    @district = nil
   end
 
 end
