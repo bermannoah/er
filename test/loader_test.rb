@@ -112,4 +112,14 @@ class LoaderTest < Minitest::Test
     l.find("zipcode", "20010")
     assert_equal 1, l.queue_results.count
   end
+  
+  def test_loader_returns_error_message_if_it_cannot_find_a_thing
+    l = Loader.new
+    l.open_file
+    l.attendee_collector
+    assert_equal "first_name: Zuul not found. Sorry about that!", l.find("first_name", "Zuul")
+
+  end
+
+
 end
