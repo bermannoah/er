@@ -37,40 +37,37 @@ class QueueHolder < Loader
     @queue_results = []
   end
   
-  def queue_district(zipcode=queue_results[0].zipcode)
-    if @queue_results.count < 10
-      found_district = @client.districts_locate(zipcode)[:results][0][:district].to_s
-      @district = found_district
-    else
-      "Sorry, too many entries."
-    end
+  def queue_district
+      @queue_results.each do |att|
+        found_district = @client.districts_locate(att.zipcode)[:results][0][:district].to_s
+        att.district = found_district
+      end
   end
   
+  def no_districts_here
+    @queue_results.each do |att|
+      att.district = "N/A"
+    end
+  end
+    
   def queue_print
     table = Terminal::Table.new 
     table.headings = [HEADER_ROW]
     table.title = "Queue Printout on #{Time.now.strftime("%d/%m/%Y at %H:%M")}"
-    if @queue_results.count < 10
       table.align_column(0..8, :left)
+      queue_district if @queue_results.length < 11 
+      no_districts_here if @queue_results.length > 10
       table.rows = @queue_results.map do |row|
         [row.last_name, row.first_name, row.email, row.zipcode, 
           row.city, row.state, row.street_address, row.phone_number, row.district]
       end
       puts table
-    else
-      table.align_column(0..7, :left)
-      table.rows = @queue_results.map do |row|
-        [row.last_name, row.first_name, row.email, row.zipcode, 
-          row.city, row.state, row.street_address, row.phone_number]
-      end
-      puts table
-    end
   end
   
   def queue_print_to_csv(filename="QueueOutput")
     CSV.open("#{filename}.csv", 'w') do |csv|
       header_names = %w( first_name last_name email street_address city state zipcode phone_number )
-      csv << header_names
+      csv << HEADER_ROW
       @queue_results.each do |attendee|
         csv << header_names.collect { |header| attendee.send(header) }
       end

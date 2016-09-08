@@ -106,7 +106,7 @@ class LoaderTest < Minitest::Test
     l.attendee_collector
     l.find("first_name", "Allison")
     l.find("zipcode", "20010")
-    assert_equal 20, l.queue_results.count
+    assert_equal 5, l.queue_results.count
   end
   
   def test_loader_returns_error_message_if_it_cannot_find_a_thing

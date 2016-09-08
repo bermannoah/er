@@ -1,22 +1,38 @@
 require './lib/repl'
 
-class EventReporter < Repl
+class EventReporter
   
-  attr_accessor :user_selection
+  attr_accessor :user_selection, :repl
   
-puts "Hello and welcome to Event Reporter, for all your event reporting needs."
-puts "If you're not sure what to do, enter 'help'."
+  def initialize
+    @repl = Repl.new(user_selection)
+  end
+  
+  puts "Hello and welcome to Event Reporter, for all your event reporting needs."
+  puts "If you're not sure what to do, enter 'help'."
+  print "Enter command: "
 
-repl = Repl.new
+  while user_selection != "quit"
+    
+    
+    
+    
+  end
+    
+  
 
-loop do 
-  print "Enter command > "
-  user_selection = gets.chomp
-  choice = repl.user_selection
-  break if choice == "quit" 
-  puts choice unless choice == "quit"
-end
 
-puts "Thanks for using Event Reporter! Bye now."
-exit
+
+
+
+    # 
+    # loop do 
+    #   user_selection = gets.chomp
+    #   choice ||= Repl.new(user_selection) 
+    #   break if choice == "quit" 
+    #   puts choice unless choice == "quit"
+    # end
+
+    puts "Thanks for using Event Reporter! Bye now."
+    exit
 end

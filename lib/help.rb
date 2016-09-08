@@ -113,7 +113,7 @@ class Help
       puts "Incorrect input, try again."
       puts "---"
       puts " "
-  end
+    end
     
   end
  end
