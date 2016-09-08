@@ -64,6 +64,20 @@ class QueueHolder < Loader
       puts table
   end
   
+  def queue_print_by(attribute)
+    table = Terminal::Table.new 
+    table.headings = [HEADER_ROW]
+    table.title = "Queue Printout on #{Time.now.strftime("%d/%m/%Y at %H:%M")}"
+      table.align_column(0..8, :left)
+      queue_district if @queue_results.length < 11 
+      no_districts_here if @queue_results.length > 10
+      table.rows = @queue_results.map do |row|
+        [row.last_name, row.first_name, row.email, row.zipcode, 
+          row.city, row.state, row.street_address, row.phone_number, row.district]
+      end
+      puts table
+  end
+  
   def queue_print_to_csv(filename="QueueOutput")
     CSV.open("#{filename}.csv", 'w') do |csv|
       header_names = %w( first_name last_name email street_address city state zipcode phone_number )

@@ -28,7 +28,11 @@ class Loader
   end
   
   def find(attribute, criteria)
-    (@queue_results = @data.find_all { |attendee| attendee.send(attribute) == criteria })      
+    if @data == nil
+      @queue_results = []
+    else
+    (@queue_results = @data.find_all { |attendee| attendee.send(attribute) == criteria }) 
+    end     
     if @queue_results == []
       "#{attribute}: #{criteria} not found. Sorry about that!"
     end

@@ -16,6 +16,7 @@ class Repl
 
     puts "Hello and welcome to Event Reporter, for all your event reporting needs."
     puts "If you're not sure what to do, enter 'help'."
+    puts "To quit, simply enter 'quit'."
     until @user_selection == "quit"
       print "Enter command: "
       @user_selection = gets.chomp
@@ -47,11 +48,11 @@ class Repl
       puts @queue.queue_district
     when "print"
       puts @queue.queue_print
-    when "print by"
+    when "print", "by"
       puts @queue.queue_print_by(attribute)
-    when "save to"
+    when "save", "to"
       puts @queue.queue_save_to(attribute)
-    when "export html"
+    when "export", "html"
       puts @queue.queue_export_html(attribute)
     else
       puts "Incorrect input."
