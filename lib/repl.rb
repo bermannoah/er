@@ -11,7 +11,6 @@ class Repl
     @loader = Loader.new(filename="event_attendees.csv")
     @queue = QueueHolder.new
     @user_selection = "here is a string"
-    @command_words = ["queue", "print", "find", "by", "city", "find city"]
   end
 
   def run
@@ -26,16 +25,7 @@ class Repl
       command = usable[0]
       selection = usable[1]
       criteria = usable[-1]
-      
-      
-      
-      
-      # binding.pry
-      # criteria = usable.reject do |word|
-      #   @command_words.any?{|cw| word == cw }
-      # end
-        
-
+  
       case command
       when "queue"
         queue_commands(selection, criteria)
@@ -48,6 +38,8 @@ class Repl
       end
     end
     
+    puts "Thanks for using Event Reporter. Event report with us again soon."
+    
   end
   
   def queue_commands(selection, criteria)
@@ -56,6 +48,7 @@ class Repl
       puts @queue.queue_count
     when "clear"
       puts @queue.queue_clear 
+      puts "The queue has been cleared."
     when "district"
       puts @queue.queue_district
     when "print", "by"
@@ -88,10 +81,9 @@ class Repl
     h = Help.new
     h.run
   end
-  
+
   
 end
-
 
 r = Repl.new
 r.run

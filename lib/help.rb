@@ -1,9 +1,7 @@
 require 'pry'
 
 class Help
-  
-  attr_accessor :user_selection, :topic, :selection, :queue_helper, :load_helper, :find_helper, :help_list, :exit_message
-  
+    
   def initialize
     @user_selection = "string"
   end
@@ -80,13 +78,6 @@ end
   
   def queue_helper(selection)
     case selection
-    # when nil
-    #   puts " "
-    #   puts "---"
-    #   puts "Queue has many associated commands, please specify."
-    #   puts "Type 'help' with no command to see a list of all commands."
-    #   puts "---"
-    #   puts " "
     when "count"
       puts " "
       puts "---"

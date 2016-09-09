@@ -10,7 +10,9 @@ require 'pry'
 
 class QueueHolder < Loader
   
-  attr_accessor :queue, :api_key, :client, :queue_district, :found_district, :district, :queue_count, :queue_results, :filename, :rows, :table, :table_printer, :exporter, :html_template
+  attr_accessor :client, :queue_district, 
+                :found_district, :district, :queue_count, :queue_results, 
+                :filename, :rows, :table, :table_printer, :exporter, :html_template
   
   HEADER_ROW = ["LAST NAME", "FIRST NAME", "EMAIL", "ZIPCODE", "CITY", "STATE", "ADDRESS", "PHONE", "DISTRICT"]
   CSV_HEADER_ROW = ["last_Name", "first_Name", "Email_Address", "HomePhone", "Street", "City", "State", "Zipcode"]
@@ -20,7 +22,6 @@ class QueueHolder < Loader
     @client = Congress::Client.new(File.read "./config/api_key.txt")
     @contents = nil
     @queue_results = []
-    @final_table = nil
     @district = district
   end
   
@@ -71,7 +72,6 @@ class QueueHolder < Loader
       puts table
   end
   
-  
   def queue_print_by(attribute)
       sorted = @queue_results.sort_by do |row|
         row.send(attribute)
@@ -96,9 +96,7 @@ class QueueHolder < Loader
   def queue_export_html(filename="QueueOutput.html")
     Dir.mkdir("output") && (File.rename "./lib/stylesheet.css", "./output/stylesheet.css") unless Dir.exists? "output"
     export_name = "./output/#{filename}"
-    
     queue_output_creator
-    
     File.open(export_name, 'w') do |file|
       file.puts @queue_output
     end

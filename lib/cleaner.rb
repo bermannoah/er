@@ -2,12 +2,6 @@ require 'pry'
 
 class Cleaner
   
-  attr_reader :loader, :state, :contents, 
-              :first_name, :last_name, :zipcode, 
-              :cleaned_number, :cleaned_first_name, 
-              :cleaned_last_name
-
-  
   def clean_first_name(first_name)
     first_name = first_name.strip.downcase
     first_name

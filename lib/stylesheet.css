@@ -10,6 +10,8 @@ body {
   font: 14px / 1.4 Helvetica, Sans-Serif;
 }
 
+/* Header Styles */ 
+
 .header {
   padding: 10;
   text-align: center;
@@ -17,6 +19,7 @@ body {
   font-size: 3em;
   font-weight: bold;
 }
+
 /* Table Styles */
 
 .table {
@@ -24,7 +27,7 @@ body {
   border-collapse: collapse;
 }
 
-/* stripes apparently */
+/* Stripes Maker */
 tr:nth-of-type(odd) {
   background: #eee;
 }

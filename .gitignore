@@ -7,3 +7,5 @@ coverage
 output
 
 *.csv
+!event_attendees.csv
+!small_event_attendees.csv

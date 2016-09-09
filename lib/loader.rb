@@ -7,7 +7,6 @@ require 'pry'
 
 class Loader
 
-  attr_reader :api_key, :client, :attendee_collector
   attr_accessor :contents, :data, :attribute, :criteria, :queue_results
   
   def initialize(filename="./event_attendees.csv")
