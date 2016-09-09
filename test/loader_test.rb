@@ -97,7 +97,15 @@ class LoaderTest < Minitest::Test
     l.open_file
     l.attendee_collector
     assert_equal "first_name: Zuul not found. Sorry about that!", l.find("first_name", "Zuul")
-
+  end
+  
+  def tesT_loader_sets_queue_results_to_empty_array_if_nothing_found
+    l = Loader.new
+    l = Loader.new
+    l.open_file('./small_event_attendees.csv')
+    l.attendee_collector
+    l.find("zipcode", "99999")
+    assert_equal [], l.queue_results
   end
 
 

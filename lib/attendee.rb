@@ -18,9 +18,3 @@ class Attendee
   end
 
 end
-
-def get_attribute(row, attr)
-  if attr === "first_name"
-    row.first_name
-  end
-end

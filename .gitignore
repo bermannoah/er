@@ -3,3 +3,7 @@ config
 coverage
 
 .DS_Store
+
+output
+
+*.csv
