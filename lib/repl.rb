@@ -48,14 +48,14 @@ class Repl
       puts @queue.queue_clear 
     when "district"
       puts @queue.queue_district
-    when "print"
-      puts @queue.queue_print
     when "print", "by"
       puts @queue.queue_print_by(attribute)
     when "save", "to"
       puts @queue.queue_print_to_csv(attribute)
     when "export", "html"
       puts @queue.queue_export_html(attribute)
+    when "print"
+      puts @queue.queue_print
     else
       puts "Incorrect input."
     end

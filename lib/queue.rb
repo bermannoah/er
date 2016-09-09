@@ -55,14 +55,14 @@ class QueueHolder < Loader
     end
   end
     
-  def queue_print
+  def queue_print(stuff=@queue_results)
     table = Terminal::Table.new 
     table.headings = [HEADER_ROW]
     table.title = "Queue Printout on #{Time.now.strftime("%d/%m/%Y at %H:%M")}"
       table.align_column(0..8, :left)
-      queue_district if @queue_results.length < 11 
-      no_districts_here if @queue_results.length > 10
-      table.rows = @queue_results.map do |row|
+      queue_district if stuff.length < 11 
+      no_districts_here if stuff.length > 10
+      table.rows = stuff.map do |row|
         [row.last_name.capitalize, row.first_name.capitalize, row.email, row.zipcode, 
           row.city.split.map(&:capitalize).join(" "), row.state.upcase, row.street_address.split.map(&:capitalize).join(" "), row.phone_number, row.district]
       end
@@ -70,17 +70,10 @@ class QueueHolder < Loader
   end
   
   def queue_print_by(attribute)
-    table = Terminal::Table.new 
-    table.headings = [HEADER_ROW]
-    table.title = "Queue Printout on #{Time.now.strftime("%d/%m/%Y at %H:%M")}"
-      table.align_column(0..8, :left)
-      queue_district if @queue_results.length < 11 
-      no_districts_here if @queue_results.length > 10
-      table.rows = @queue_results.map do |row|
-        [row.last_name.capitalize, row.first_name.capitalize, row.email, row.zipcode, 
-          row.city.split.map(&:capitalize).join(" "), row.state.upcase, row.street_address.split.map(&:capitalize).join(" "), row.phone_number, row.district]
+      sorted = @queue_results.sort_by do |row|
+        row.send(attribute)
       end
-      puts table
+      queue_print(sorted)
   end
   
   def queue_print_to_csv(filename="QueueOutput")
@@ -123,5 +116,4 @@ class QueueHolder < Loader
   end
   
 end
-
   
