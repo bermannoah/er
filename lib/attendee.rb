@@ -8,10 +8,10 @@ class Attendee
     cleaner = Cleaner.new
     @first_name = cleaner.clean_first_name(row[:first_name])
     @last_name = cleaner.clean_last_name(row[:last_name])
-    @email = row[:email_address]
-    @street_address = row[:street]
-    @city = row[:city]
-    @state = row[:state]
+    @email = cleaner.clean_email(row[:email_address])
+    @street_address = cleaner.clean_street(row[:street])
+    @city = cleaner.clean_city(row[:city])
+    @state = cleaner.clean_state(row[:state])
     @zipcode = cleaner.clean_zipcode(row[:zipcode])
     @phone_number = cleaner.clean_phone_number(row[:homephone])
     @district = nil

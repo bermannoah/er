@@ -25,6 +25,7 @@ class Repl
       command = usable[0]
       selection = usable[1]
       attribute = usable[-1]        
+      
       case command
       when "queue"
         queue_commands(selection, attribute)

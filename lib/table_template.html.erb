@@ -20,13 +20,13 @@
     <% no_districts_here if @queue_results.length > 10 %>
     <% @queue_results.each do |attendee| %>
       <tr class="table">
-        <td class="table"><%= "#{attendee.last_name}" %></td> 
-        <td class="table"><%= "#{attendee.first_name}" %></td> 
+        <td class="table"><%= "#{attendee.last_name.capitalize}" %></td> 
+        <td class="table"><%= "#{attendee.first_name.capitalize}" %></td> 
         <td class="table"><%= "#{attendee.email}" %></td> 
         <td class="table"><%= "#{attendee.zipcode}" %></td> 
-        <td class="table"><%= "#{attendee.city}" %></td> 
-        <td class="table"><%= "#{attendee.state}" %></td> 
-        <td class="table"><%= "#{attendee.street_address}" %></td>
+        <td class="table"><%= "#{attendee.city.capitalize}" %></td> 
+        <td class="table"><%= "#{attendee.state.upcase}" %></td> 
+        <td class="table"><%= "#{attendee.street_address.capitalize}" %></td>
         <td class="table"><%= "#{attendee.phone_number}" %></td>
         <td class="table"><%= "#{attendee.district}" %></td>
       </tr>

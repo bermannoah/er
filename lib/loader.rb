@@ -31,7 +31,7 @@ class Loader
     if @data == nil
       @queue_results = []
     else
-    (@queue_results = @data.find_all { |attendee| attendee.send(attribute) == criteria }) 
+    (@queue_results = @data.find_all { |attendee| attendee.send(attribute) == criteria.downcase }) 
     end     
     if @queue_results == []
       "#{attribute}: #{criteria} not found. Sorry about that!"
