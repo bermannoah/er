@@ -1,9 +1,9 @@
 /* Document Styles */
 
 * {
-  margin: 0;
+  margin: auto;
   padding: 0;
-  align-self: center;
+  align: center;
 }
 
 body {
@@ -11,9 +11,11 @@ body {
 }
 
 .header {
-  align-self: center;
+  padding: 10;
+  text-align: center;
   font-family: Helvetica, sans-serif;
-  font-size: 1em;
+  font-size: 3em;
+  font-weight: bold;
 }
 /* Table Styles */
 
