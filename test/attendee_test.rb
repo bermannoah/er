@@ -12,7 +12,7 @@ class AttendeeTest < Minitest::Test
                         :zipcode => 12345,
                         :homephone => "6154385000"
                                                 } )
-    assert_equal "Allison", a.first_name
+    assert_equal "allison", a.first_name
     assert true
   end
   
@@ -22,7 +22,7 @@ class AttendeeTest < Minitest::Test
                         :zipcode => 12345,
                         :homephone => "6154385000"
                                                 } )
-    assert_equal "Nguyen", a.last_name
+    assert_equal "nguyen", a.last_name
   end
   
   def test_attendee_has_an_email_address
@@ -36,21 +36,21 @@ class AttendeeTest < Minitest::Test
     l = Loader.new
     l.open_file
     l.attendee_collector
-    assert_equal "3155 19th St NW", l.data[0].street_address
+    assert_equal "3155 19th st nw", l.data[0].street_address
   end
   
   def test_attendee_has_a_city
     l = Loader.new
     l.open_file
     l.attendee_collector
-    assert_equal "Washington", l.data[0].city
+    assert_equal "washington", l.data[0].city
   end
   
   def test_attendee_has_a_state
     l = Loader.new
     l.open_file
     l.attendee_collector
-    assert_equal "DC", l.data[0].state
+    assert_equal "dc", l.data[0].state
   end
   
   def test_attendee_has_a_phone_number

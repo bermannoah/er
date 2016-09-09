@@ -41,7 +41,7 @@ class QueueHolderTest < Minitest::Test
     q.find("zipcode", "20010")
     assert_equal 5, q.queue_count
     q.find_district
-    assert_equal "0", q.queue_results[0].district
+    assert_equal 0, q.queue_results[0].district
   end
   
   def test_if_more_than_ten_entries_queue_will_not_look_for_districts

@@ -30,7 +30,7 @@ class LoaderTest < Minitest::Test
     l.open_file
     l.attendee_collector
     l.find("email", "arannon@jumpstartlab.com")
-    assert_equal "Allison", l.queue_results[0].first_name
+    assert_equal "allison", l.queue_results[0].first_name
   end  
   
   def test_loader_can_find_by_street_address
@@ -38,7 +38,7 @@ class LoaderTest < Minitest::Test
     l.open_file
     l.attendee_collector 
     l.find("street_address", "3155 19th St NW" )
-    assert_equal "3155 19th St NW", l.queue_results[0].street_address
+    assert_equal "3155 19th st nw", l.queue_results[0].street_address
   end
   
   def test_loader_can_find_by_city
@@ -46,7 +46,7 @@ class LoaderTest < Minitest::Test
     l.open_file
     l.attendee_collector 
     l.find("city", "Washington" )
-    assert_equal "Washington", l.queue_results[0].city
+    assert_equal "washington", l.queue_results[0].city
   end
   
   def test_loader_can_find_by_state
@@ -54,7 +54,7 @@ class LoaderTest < Minitest::Test
     l.open_file
     l.attendee_collector 
     l.find("state", "DC" )
-    assert_equal "DC", l.queue_results[0].state
+    assert_equal "dc", l.queue_results[0].state
   end
   
   def test_loader_can_find_by_zipcode
@@ -63,14 +63,6 @@ class LoaderTest < Minitest::Test
     l.attendee_collector 
     l.find("zipcode", "20010" )
     assert_equal "20010", l.queue_results[0].zipcode
-  end
-  
-  def test_loader_can_find_by_phone_number
-    l = Loader.new
-    l.open_file
-    l.attendee_collector
-    l.find("phone_number", 6154385000)
-    assert_equal 6154385000, l.queue_results[0].phone_number
   end
   
   def test_loader_does_not_do_duplicates

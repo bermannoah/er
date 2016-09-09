@@ -13,6 +13,8 @@ class QueueHolder < Loader
   attr_accessor :queue, :api_key, :client, :queue_district, :found_district, :district, :queue_count, :queue_results, :filename, :rows, :table, :table_printer, :exporter, :html_template
   
   HEADER_ROW = ["LAST NAME", "FIRST NAME", "EMAIL", "ZIPCODE", "CITY", "STATE", "ADDRESS", "PHONE", "DISTRICT"]
+  CSV_HEADER_ROW = ["last_Name", "first_Name", "Email_Address", "HomePhone", "Street", "City", "State", "Zipcode"]
+  
   
   def initialize
     @client = Congress::Client.new(File.read "./config/api_key.txt")
@@ -44,14 +46,14 @@ class QueueHolder < Loader
   
   def queue_district
       @queue_results.each do |att|
-        found_district = @client.districts_locate(att.zipcode)[:results][0][:district].to_s
+        found_district = @client.districts_locate(att.zipcode)[:results][0][:district]
         att.district = found_district
       end
   end
   
   def no_districts_here
-    @queue_results.each do |att|
-      att.district = "N/A"
+    @queue_results.each do |row|
+      row.district = "N/A"
     end
   end
     
@@ -73,25 +75,26 @@ class QueueHolder < Loader
       sorted = @queue_results.sort_by do |row|
         row.send(attribute)
       end
+      @queue_results = sorted
       queue_print(sorted)
   end
   
   def queue_print_to_csv(filename="QueueOutput")
-    CSV.open("#{filename}.csv", 'w') do |csv|
-      header_names = %w( first_name last_name email street_address city state zipcode phone_number district )
-      csv << HEADER_ROW
+    CSV.open("#{filename}", 'w') do |csv|
+      header_names = %w( last_name first_name email street_address city state zipcode phone_number district )
+      csv << CSV_HEADER_ROW
       queue_district if @queue_results.length < 11 
       no_districts_here if @queue_results.length > 10
       @queue_results.each do |attendee|
         csv << header_names.collect { |header| attendee.send(header) }
       end
-      puts "CSV file exported with the name #{filename}.csv."
+      puts "CSV file exported with the name #{filename}"
     end
   end
   
-  def queue_export_html(filename="QueueOutput")
+  def queue_export_html(filename="QueueOutput.html")
     Dir.mkdir("output") && (File.rename "./lib/stylesheet.css", "./output/stylesheet.css") unless Dir.exists? "output"
-    export_name = "./output/filename.html"
+    export_name = "./output/#{filename}"
     
     queue_output_creator
     
