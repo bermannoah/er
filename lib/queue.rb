@@ -25,12 +25,6 @@ class QueueHolder < Loader
     @district = district
   end
   
-  def all_entries(filename="./event_attendees.csv")
-    l = Loader.new
-    l.open_file
-    @queue_results = l.attendee_collector
-  end
-  
   def queue_count
     @queue_results.count 
   end

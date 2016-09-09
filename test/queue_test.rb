@@ -53,6 +53,5 @@ class QueueHolderTest < Minitest::Test
     q.find_district
     assert_equal "N/A", q.queue_results[0].district
   end
-
   
 end

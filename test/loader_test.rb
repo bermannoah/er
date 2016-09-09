@@ -99,14 +99,42 @@ class LoaderTest < Minitest::Test
     assert_equal "first_name: Zuul not found. Sorry about that!", l.find("first_name", "Zuul")
   end
   
-  def tesT_loader_sets_queue_results_to_empty_array_if_nothing_found
-    l = Loader.new
+  def test_loader_sets_queue_results_to_empty_array_if_nothing_found
     l = Loader.new
     l.open_file('./small_event_attendees.csv')
     l.attendee_collector
     l.find("zipcode", "99999")
     assert_equal [], l.queue_results
   end
-
-
+  
+  def test_loader_is_case_insensitive
+    l = Loader.new
+    l.open_file('./small_event_attendees.csv')
+    l.attendee_collector
+    l.find("first_name", "aLliSoN")
+    assert_equal "allison", l.queue_results[0].first_name
+    l.find("last_name", "nGuYen")
+    assert_equal "nguyen", l.queue_results[0].last_name
+  end
+  
+  def test_loader_is_case_insensitive_with_states_and_cities
+    l = Loader.new
+    l.open_file('./small_event_attendees.csv')
+    l.attendee_collector
+    l.find("state", "cA")
+    assert_equal 3, l.queue_results.count
+    l.find("city", "SeAtTle")
+    assert_equal 2, l.queue_results.count
+  end
+  
+  def test_loader_returns_an_empty_array_if_there_is_no_data
+    l = Loader.new
+    l.find("zipcode", "63105")
+    assert_equal [], l.data
+    assert_equal [], l.queue_results
+  end
+  
+  
+    
+  
 end

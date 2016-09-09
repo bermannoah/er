@@ -46,6 +46,12 @@ class CleanerTest < Minitest::Test
     assert_equal 5555555555, c.clean_phone_number("(555) 555 5555")
   end
   
+  def test_cleaner_can_clean_a_state
+    c = Cleaner.new
+    assert_equal "mo", c.clean_state("Mo")
+  end
+
+  
     
 
 end
