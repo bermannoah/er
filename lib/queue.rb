@@ -71,6 +71,7 @@ class QueueHolder < Loader
       puts table
   end
   
+  
   def queue_print_by(attribute)
       sorted = @queue_results.sort_by do |row|
         row.send(attribute)
@@ -79,7 +80,7 @@ class QueueHolder < Loader
       queue_print(sorted)
   end
   
-  def queue_print_to_csv(filename="QueueOutput")
+  def queue_print_to_csv(filename="QueueOutput.csv")
     CSV.open("#{filename}", 'w') do |csv|
       header_names = %w( last_name first_name email street_address city state zipcode phone_number district )
       csv << CSV_HEADER_ROW

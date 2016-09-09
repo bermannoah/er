@@ -13,7 +13,7 @@ def run
   puts " "
   puts "---"
   puts "Enter 'help' to see a list of commands."
-  puts "Enter 'help' followed by the command name to bring up help for that command."
+  puts "Enter the command name to bring up help for that command."
   puts "Enter 'exit' to exit and return to the main menu."
   puts "---"
   puts " "
