@@ -11,6 +11,7 @@ class Repl
     @loader = Loader.new(filename="event_attendees.csv")
     @queue = QueueHolder.new
     @user_selection = "here is a string"
+    @command_words = ["queue", "print", "find", "by", "city", "find city"]
   end
 
   def run
@@ -18,21 +19,30 @@ class Repl
     puts "Hello and welcome to Event Reporter, for all your event reporting needs."
     puts "If you're not sure what to do, enter 'help'."
     puts "To quit, simply enter 'quit'."
-    until @user_selection == "quit"
+    until @user_selection == "quit" || @user_selection == "exit"
       print "Enter command: "
       @user_selection = gets.chomp
-      usable = @user_selection.split(" ")
+      @usable = @user_selection.split(" ")
       command = usable[0]
       selection = usable[1]
-      attribute = usable[-1]        
+      criteria = usable[-1]
       
+      
+      
+      
+      # binding.pry
+      # criteria = usable.reject do |word|
+      #   @command_words.any?{|cw| word == cw }
+      # end
+        
+
       case command
       when "queue"
-        queue_commands(selection, attribute)
+        queue_commands(selection, criteria)
       when "load"
         load_commands(selection)
       when "find"
-        find_commands(selection, attribute)
+        find_commands
       when "help"
         help_commands
       end
@@ -40,7 +50,7 @@ class Repl
     
   end
   
-  def queue_commands(selection, attribute)
+  def queue_commands(selection, criteria)
     case selection
     when "count"
       puts @queue.queue_count
@@ -49,11 +59,11 @@ class Repl
     when "district"
       puts @queue.queue_district
     when "print", "by"
-      puts @queue.queue_print_by(attribute)
+      puts @queue.queue_print_by(criteria)
     when "save", "to"
-      puts @queue.queue_print_to_csv(attribute)
+      puts @queue.queue_print_to_csv(criteria)
     when "export", "html"
-      puts @queue.queue_export_html(attribute)
+      puts @queue.queue_export_html(criteria)
     when "print"
       puts @queue.queue_print
     else
@@ -69,8 +79,8 @@ class Repl
     puts "Loaded #{filename}."
   end
   
-  def find_commands(attribute, criteria)
-    @queue.find(attribute, criteria.to_s)
+  def find_commands
+    @queue.find(usable[1], usable[2..-1].join(" "))
     puts "Found #{queue.queue_results.count} records."
   end
   
