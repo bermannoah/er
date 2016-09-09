@@ -37,6 +37,11 @@ class QueueHolder < Loader
     @queue_results = []
   end
   
+  def find_district
+    queue_district if @queue_results.length < 11 
+    no_districts_here if @queue_results.length > 10
+  end
+  
   def queue_district
       @queue_results.each do |att|
         found_district = @client.districts_locate(att.zipcode)[:results][0][:district].to_s

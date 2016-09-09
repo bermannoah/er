@@ -40,18 +40,8 @@ class QueueHolderTest < Minitest::Test
     q.attendee_collector
     q.find("zipcode", "20010")
     assert_equal 5, q.queue_count
-    q.queue_district
-    assert_equal "0", q.queue_district
-  end
-  
-  def test_if_less_than_ten_entries_queue_looks_for_district_and_doesnt_just_return_default
-    q = QueueHolder.new
-    q.open_file
-    q.attendee_collector
-    q.find("zipcode", "20010")
-    assert_equal 5, q.queue_results.count
-    q.queue_district
-    assert_equal "0", q.queue_district
+    q.find_district
+    assert_equal "0", q.queue_results[0].district
   end
   
   def test_if_more_than_ten_entries_queue_will_not_look_for_districts
@@ -60,8 +50,8 @@ class QueueHolderTest < Minitest::Test
     q.attendee_collector
     q.find("first_name", "Allison")
     assert_equal 16, q.queue_count
-    q.queue_district
-    assert_equal "Sorry, too many entries.", q.queue_district
+    q.find_district
+    assert_equal "N/A", q.queue_results[0].district
   end
 
   

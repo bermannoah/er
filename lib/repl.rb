@@ -1,5 +1,6 @@
-# require './lib/help'
 require './lib/queue'
+require './lib/help'
+
 
 class Repl
   
@@ -73,7 +74,8 @@ class Repl
   end
   
   def help_commands(attribute)
-    Help.new
+    h = Help.new
+    h.run
   end
   
   

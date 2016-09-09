@@ -73,15 +73,6 @@ class LoaderTest < Minitest::Test
     assert_equal 6154385000, l.queue_results[0].phone_number
   end
   
-  def test_loader_find_is_case_insensitive
-    skip
-    l = Loader.new
-    l.open_file
-    l.attendee_collector
-    l.find("first_name", "Allison")
-    assert_equal 16, l.queue_results.count
-  end
-  
   def test_loader_does_not_do_duplicates
     l = Loader.new
     l.open_file

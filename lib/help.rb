@@ -2,60 +2,104 @@ require 'pry'
 
 class Help
   
-  attr_reader :user_input
-
-  loop do
+  attr_accessor :user_input, :topic, :selection
   
-    puts "Enter 'help' to see a list of commands."
-    puts "Enter the command name to bring up help for that command."
-    puts "Enter 'exit' to exit and return to the main menu."
+  def initialize
+    @user_selection = "string"
+  end
 
-    @user_input = gets.chomp.to_s
+def run
 
-    if @user_input == "help"
-      puts " "
-      puts "---"
-      puts "Here is a list of commands: "
-      puts "load"
-      puts "queue count"
-      puts "queue clear"
-      puts "queue district"
-      puts "queue print"
-      puts "queue print by"
-      puts "queue save to"
-      puts "queue export html"
-      puts "find"
-      puts "---"
-      puts " "
-    elsif @user_input == "help load"
-      puts " "
-      puts "---"
-      puts "This will erase any already loaded data."
-      puts "If you don't specify a file, it will load the default..."
-      puts "...which in this case is 'event_attendees.csv'."
-      puts "You can specify a file by typing load <filepath>"
-      puts "---"
-      puts " "
-    elsif @user_input == "help queue"
+  puts " "
+  puts "---"
+  puts "Enter 'help' to see a list of commands."
+  puts "Enter 'help' followed by the command name to bring up help for that command."
+  puts "Enter 'exit' to exit and return to the main menu."
+  puts "---"
+  puts " "
+
+  until @user_selection == "exit"
+    print "Enter command: "
+    @user_input = gets.chomp
+    usable = @user_selection.split(" ")
+    ask = usable[1]
+    topic = usable[1]
+    selection = usable[2]
+    case topic
+    when "queue"
+      puts queue_helper(selection)
+    when "load"
+      puts load_helper
+    when "find"
+      puts find_helper
+    when "help"
+      puts help_list
+    when "exit"
+      puts exit_message
+    end
+  end
+  
+  def help_list
+    puts " "
+    puts "---"
+    puts "Here is a list of commands: "
+    puts "load"
+    puts "queue count"
+    puts "queue clear"
+    puts "queue district"
+    puts "queue print"
+    puts "queue print by"
+    puts "queue save to"
+    puts "queue export html"
+    puts "find"
+    puts "---"
+    puts " "
+  end
+  
+  def load_helper
+    puts " "
+    puts "---"
+    puts "This will erase any already loaded data."
+    puts "If you don't specify a file, it will load the default..."
+    puts "...which in this case is 'event_attendees.csv'."
+    puts "You can specify a file by typing load <filepath>"
+    puts "---"
+    puts " "
+  end
+  
+  def find_helper
+    puts " "
+    puts "---"
+    puts "This loads the queue with all records matching the criteria for the given attribute."
+    puts "For example, 'find zipcode 20011' will print all records with a zipcode of 20011."
+    puts "You can use the following attributes:"
+    puts "last_name, first_name, email, zipcode, city, state, address, phone_number"      
+    puts "---"
+    puts " "
+  end
+  
+  def queue_helper(selection)
+    case selection
+    when nil
       puts " "
       puts "---"
       puts "Queue has many associated commands, please specify."
       puts "Type 'help' with no command to see a list of all commands."
       puts "---"
       puts " "
-    elsif @user_input == "help queue count"
+    when "count"
       puts " "
       puts "---"
       puts "This will output the number of records currently in queue."
       puts "---"
       puts " "
-    elsif @user_input == "help queue clear"
+    when "clear"
       puts " "
       puts "---"
       puts "This will empty the queue."
       puts "---"
       puts " "
-    elsif @user_input == "help queue district"
+    when "district"
       puts " "
       puts "---"
       puts "If there are less than 10 entries, this will"
@@ -63,57 +107,46 @@ class Help
       puts "info for each entry."      
       puts "---"
       puts " "
-    elsif @user_input == "help queue print"
+    when "print"
       puts " "
       puts "---"
       puts "This will print out a tab-delimited table with"
       puts "the information from the queue."
       puts "---"
       puts " "
-    elsif @user_input == "help queue print by"
+    when "print", "by"
       puts " "
       puts "---"
       puts "This will print data sorted by a particular attribute."
       puts "For example: 'queue print by zipcode' will sort data by zipcode."
       puts "---"
       puts " "
-    elsif @user_input == "help queue save to"
+    when "save", "to"
       puts " "
       puts "---"
       puts "This will export the current queue to a CSV."
       puts "Enter a filename after 'to', otherwise it will use 'results.csv'"
       puts "---"
       puts " "
-    elsif @user_input == "help queue export html"
+    when "export", "html"
       puts " "
       puts "---"
       puts "This will export the current queue to a valid HTML file."
       puts "Enter a filename after 'html', otherwise it will use 'results.html'."
       puts "---"
       puts " "
-    elsif @user_input == "help find"
-      puts " "
-      puts "---"
-      puts "This loads the queue with all records matching the criteria for the given attribute."
-      puts "For example, 'find zipcode 20011' will print all records with a zipcode of 20011."
-      puts "You can use the following attributes:"
-      puts "last_name, first_name, email, zipcode, city, state, address, phone_number"      
-      puts "---"
-      puts " "
-    elsif @user_input == "exit"
-      puts " "
-      puts "---"
-      puts "Okay, goodbye."
-      puts "---"
-      puts " "
-      exit
-    else
-      puts " "
-      puts "---"
-      puts "Incorrect input, try again."
-      puts "---"
-      puts " "
     end
-    
   end
- end
+      
+      
+  def exit_message
+    puts " "
+    puts "---"
+    puts "Okay, goodbye."
+    puts "---"
+    puts " "
+    exit
+  end
+    
+end
+end
