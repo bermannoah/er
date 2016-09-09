@@ -63,8 +63,8 @@ class QueueHolder < Loader
       queue_district if @queue_results.length < 11 
       no_districts_here if @queue_results.length > 10
       table.rows = @queue_results.map do |row|
-        [row.last_name, row.first_name, row.email, row.zipcode, 
-          row.city, row.state, row.street_address, row.phone_number, row.district]
+        [row.last_name.capitalize, row.first_name.capitalize, row.email, row.zipcode, 
+          row.city.split.map(&:capitalize).join(" "), row.state.upcase, row.street_address.split.map(&:capitalize).join(" "), row.phone_number, row.district]
       end
       puts table
   end
@@ -78,7 +78,7 @@ class QueueHolder < Loader
       no_districts_here if @queue_results.length > 10
       table.rows = @queue_results.map do |row|
         [row.last_name.capitalize, row.first_name.capitalize, row.email, row.zipcode, 
-          row.city.capitalize, row.state.upcase, row.street_address.capitalize, row.phone_number, row.district]
+          row.city.split.map(&:capitalize).join(" "), row.state.upcase, row.street_address.split.map(&:capitalize).join(" "), row.phone_number, row.district]
       end
       puts table
   end

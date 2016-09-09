@@ -24,9 +24,9 @@
         <td class="table"><%= "#{attendee.first_name.capitalize}" %></td> 
         <td class="table"><%= "#{attendee.email}" %></td> 
         <td class="table"><%= "#{attendee.zipcode}" %></td> 
-        <td class="table"><%= "#{attendee.city.capitalize}" %></td> 
+        <td class="table"><%= "#{attendee.city.split.map(&:capitalize).join(" ")}" %></td> 
         <td class="table"><%= "#{attendee.state.upcase}" %></td> 
-        <td class="table"><%= "#{attendee.street_address.capitalize}" %></td>
+        <td class="table"><%= "#{attendee.street_address.split.map(&:capitalize).join(" ")}" %></td>
         <td class="table"><%= "#{attendee.phone_number}" %></td>
         <td class="table"><%= "#{attendee.district}" %></td>
       </tr>
