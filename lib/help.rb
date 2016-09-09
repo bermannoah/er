@@ -2,7 +2,7 @@ require 'pry'
 
 class Help
   
-  attr_accessor :user_input, :topic, :selection
+  attr_accessor :user_selection, :topic, :selection, :queue_helper, :load_helper, :find_helper, :help_list, :exit_message
   
   def initialize
     @user_selection = "string"
@@ -20,24 +20,24 @@ def run
 
   until @user_selection == "exit"
     print "Enter command: "
-    @user_input = gets.chomp
+    @user_selection = gets.chomp
     usable = @user_selection.split(" ")
-    ask = usable[1]
-    topic = usable[1]
-    selection = usable[2]
+    topic = usable[0]
+    selection = usable[1]
     case topic
-    when "queue"
-      puts queue_helper(selection)
-    when "load"
-      puts load_helper
-    when "find"
-      puts find_helper
-    when "help"
-      puts help_list
-    when "exit"
-      puts exit_message
-    end
+      when "queue"
+        puts queue_helper(selection)
+      when "load"
+        puts load_helper
+      when "find"
+        puts find_helper
+      when "help"
+        puts help_list
+      when "exit"
+        puts exit_message
+      end
   end
+end
   
   def help_list
     puts " "
@@ -80,13 +80,13 @@ def run
   
   def queue_helper(selection)
     case selection
-    when nil
-      puts " "
-      puts "---"
-      puts "Queue has many associated commands, please specify."
-      puts "Type 'help' with no command to see a list of all commands."
-      puts "---"
-      puts " "
+    # when nil
+    #   puts " "
+    #   puts "---"
+    #   puts "Queue has many associated commands, please specify."
+    #   puts "Type 'help' with no command to see a list of all commands."
+    #   puts "---"
+    #   puts " "
     when "count"
       puts " "
       puts "---"
@@ -145,8 +145,6 @@ def run
     puts "Okay, goodbye."
     puts "---"
     puts " "
-    exit
   end
     
-end
 end

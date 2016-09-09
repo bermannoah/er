@@ -34,7 +34,7 @@ class Repl
       when "find"
         find_commands(selection, attribute)
       when "help"
-        help_commands(selection)
+        help_commands
       end
     end
     
@@ -70,11 +70,11 @@ class Repl
   end
   
   def find_commands(attribute, criteria)
-    @queue.find(attribute, criteria)
+    @queue.find(attribute, criteria.to_s)
     puts "Found #{queue.queue_results.count} records."
   end
   
-  def help_commands(attribute)
+  def help_commands
     h = Help.new
     h.run
   end
